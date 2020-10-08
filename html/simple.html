@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" /><!-- 文字コードはutf-8を使用する -->
+    <title>Stage Control</title><!-- タイトルバーに表示されるメッセージ -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <!-- ログ表示用のスタイルシートなので，これは消さない -->
+    <style>
+    .box {
+        width: 440px;
+        float: left;
+        margin: 0 20px 0 20px;
+    }
+
+    .box div, .box input {
+        border: 1px solid;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        width: 100%;
+        padding: 5px;
+        margin: 3px 0 10px 0;
+    }
+
+    .box div {
+        border-color: grey;
+        height: 300px;
+        overflow: auto;
+    }
+
+    div code {
+        display: block;
+    }
+
+    #second div {
+        font-size: 0.6em;
+    }
+    </style>
+</head>
+
+<body>
+<div>
+    <div>
+        <form>
+            <label id='base_topic'></label>
+            [<label id="l_world_x">--</label>, <label id="l_world_y">--</label>]
+
+        <input type="button" value="GOTO" onclick="OnButtonClick('GOTO');">
+        <input class='form-control' type="text" size="10" name="world_x" id="world_x" placeholder="X" value="35.893246" />
+        <input class='form-control' type="text" size="10" name="world_y" id="world_y" placeholder="Y" value="139.954909" />
+        </form>
+    </div>
+</div>
+
+<script>
+    var queryString = window.location.search;
+    var query = [...new URLSearchParams(queryString).entries()].reduce((obj, e) => ({...obj, [e[0]]: e[1]}), {});
+    var base_topic = query.topic;
+    var h2 = document.getElementById("base_topic");
+    h2.innerHTML = base_topic;
+    var topic_info = 'stage/info/' + base_topic;
+    var topic_ctrl = 'stage/ctrl/' + base_topic;
+    // MQTT over WebSocketの初期化
+    var wsbroker = location.hostname;
+    var wsport = 12000;
+    // MQTTの接続オプション
+    var options = {
+        useSSL: false,
+        timeout: 3,
+        onSuccess: function () {
+            console.debug("CONNECTION SUCCESS");
+            client.subscribe(topic_info, {qos: 1});
+        },
+        onFailure: function (message) {
+            console.debug("CONNECTION FAILURE - " + message.errorMessage);
+        }
+    };
+    // サーバーがHTTPS対応だった時の処理
+    if (location.protocol == "https:") {
+        wsport = 12473;
+        options.useSSL = true;
+    }
+
+    // MQTTのクライアントを作成する クライアントID名はランダムに作る
+    var client = new Paho.MQTT.Client(wsbroker, wsport, "/ws", "myclientid_" + parseInt(Math.random() * 100, 10));
+    // 切断時のコールバック
+    client.onConnectionLost = function (responseObject) {
+        console.debug("CONNECTION LOST - " + responseObject.errorMessage);    
+    };
+    // MQTTメッセージSubscribe時のコールバック
+    client.onMessageArrived = function (message) {
+        console.debug("RECEIVE ON " + message.destinationName + " PAYLOAD " + message.payloadString);   //debugボックスに表示
+        var stage_name = message.destinationName;   // stage名はトピック名とする
+
+        var stage_data = JSON.parse( message.payloadString );   // stageのデータを連想配列にして格納
+
+        var world_x  = parseFloat( stage_data["position"]["x_world"] );  // X world
+        var world_y  = parseFloat( stage_data["position"]["y_world"] ); // Y world
+        if (isNaN(world_x) || isNaN(world_y)){
+            return;
+        }
+        document.getElementById('l_world_x').innerHTML = world_x;
+        document.getElementById('l_world_y').innerHTML = world_y;
+    }
+
+    // 最初にメッセージを表示してMQTTをブローカーに接続
+    console.debug("CONNECT TO " + wsbroker + ":" + wsport);
+    client.connect(options);        // 接続
+    //== ここからボタンを押した時の処理=============================================
+    // stage-ctrl command
+    var command = {
+            "command":"None",
+            "d_x":"0",
+            "d_y":"0",                
+    }
+
+    // HTML上のボタンが押された時の処理
+    function OnButtonClick(str) {
+        console.log("button clicked")
+        command["command"] = str;   // 引数の文字列がそのままコマンドになる
+
+        // GOTOのときは，XYも取得してコマンドを作る
+        if( str == "GOTO" ) {
+            world_x = document.getElementById("world_x").value;
+            world_y = document.getElementById("world_y").value;
+            command["d_x"] = world_x;
+            command["d_y"] = world_y;
+        }
+
+        // JSON型にしてからMQTTでPublishする
+        json_command = JSON.stringify(command);     // JSON型にする
+        message = new Paho.MQTT.Message(json_command);      // MQTTのメッセージパケットを作る
+        message.destinationName = topic_ctrl;   // トピック名を設定
+        client.send(message);   // MQTTでPubする
+        console.debug("SEND ON " + message.destinationName + " PAYLOAD " + message.payloadString);   //debugボックスに表示
+    }
+    //=======================ボタンを押した時の処理　ここまで============
+</script>
+</body>
+</html>

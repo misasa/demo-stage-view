@@ -1,0 +1,15 @@
+version: '2'
+services:
+  httpd:
+    image: httpd
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/local/apache2/htdocs
+  mosquitto:
+    image: eclipse-mosquitto
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+    ports:
+      - "1883:1883"
+      - "12000:12000"
