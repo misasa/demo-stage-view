@@ -6,9 +6,6 @@ You should have use a MQTT broker. Both stage device and web interface will comm
 # MQTT Topic and Payload Design
 
 In MQTT, the word topic refers to a string that the broker uses to filter messages for each connected client. 
-The topic consists of one or more topic levels. 
-Each topic level is separated by a forward slash (topic level separator). 
-
 A stage device named **myStage** publishes status information on topic **stage/info/myStage** and receives commands on **stage/ctrl/myStage**.
 
 # setup
