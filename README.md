@@ -40,7 +40,7 @@ To monitor communications between stage and web interface, issue following comma
     stage_1      | 2020-10-09 04:00:51,100 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 35.893, "y_world": 139.954}} on topic stage/info/myStage
     stage_1      | 2020-10-09 04:00:51,100 INFO:published: 1001
 
-To receive current position (and status) of **myStage** with a MQTT client software (such as mosquitto_sub), issue following command. 
+To receive current position (and status) of **myStage** with a MQTT client software **mosquitto_sub**, download and install the software from http://mosquitto.org/download/ and issue following command. 
 
     > mosquitto_sub -h localhost -t stage/info/myStage
     
