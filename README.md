@@ -1,6 +1,6 @@
 # remote stage control demo
 
-Provide demo for real-time control with xy-stage via an simple web interface. 
+Provide demo for real-time control with xy-stage via simple web interface. 
 
 # setup
     > git clone https://gitlab.misasa.okayama-u.ac.jp/DREAM/vs-remote.git
