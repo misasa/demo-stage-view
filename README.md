@@ -7,16 +7,8 @@ You should have use a MQTT broker. Both stage device and web interface will comm
 
 In MQTT, the word topic refers to a string that the broker uses to filter messages for each connected client. 
 A stage device named **myStage** publishes status information on the topic **stage/info/myStage** 
-and use a JSON encoded message payload like
-
->  {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}}
-
-.
-The stage device receives commands on **stage/ctrl/myStage** with message payload of 
-
->  {"command":"GOTO","d_x":"35.893","d_y":"139.954"}
-
-.
+and use a JSON encoded message payload like **{"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}}**.
+The stage device receives commands on **stage/ctrl/myStage** with message payload of **{"command":"GOTO","d_x":"35.893","d_y":"139.954"}**.
 
 # setup
     > git clone https://gitlab.misasa.okayama-u.ac.jp/DREAM/vs-remote.git
