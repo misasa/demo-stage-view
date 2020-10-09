@@ -7,4 +7,4 @@ Provide interface for real-time interaction with stage devices.
     > cd vs-remote
     > cp docker-compose.yml.example docker-compose.yml
     > docker-compose up -d
-    > open http://localhost/simple.html?topic=myStage
+    > python -m webbrowser http://localhost/simple.html?topic=myStage
