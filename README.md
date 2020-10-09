@@ -1,7 +1,6 @@
 # remote stage control demo
 
-Demo for real-time control with xy-stage devices via web browser. 
-This demo uses a web server, a stage, and a MQTT broker.
+Demo for real-time control of xy-stage devices with a web interface. 
 A MQTT broker is required to bidirectional communication between stage and web interface.
 In MQTT, the word topic refers to a string that the broker uses to filter messages for each connected client. 
 A stage named **myStage** publishes current position (and status) on the topic **stage/info/myStage** 
