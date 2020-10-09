@@ -36,5 +36,6 @@ To monitor communications between stage and web interface, issue following comma
     stage_1      | 2020-10-09 04:00:51,100 INFO:published: 1001
 
 To receive current position (and status) of **myStage** with a MQTT client software (such as mosquitto_sub), issue following command. 
+
     > mosquitto_sub -h localhost -t stage/info/myStage
     
