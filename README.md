@@ -1,8 +1,8 @@
-# vs-remote
+# remote stage control demo
 
-Provide interface for real-time interaction with stage devices. 
+Provide demo for real-time control with xy-stage via an simple web interface. 
 
-# demo
+# setup
     > git clone https://gitlab.misasa.okayama-u.ac.jp/DREAM/vs-remote.git
     > cd vs-remote
     > cp docker-compose.yml.example docker-compose.yml
