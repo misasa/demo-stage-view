@@ -1,4 +1,4 @@
-# remote stage control demo
+# real-time stage control over MQTT
 
 Demo for real-time control of xy-stage devices with a web interface. 
 A MQTT broker is required to bidirectional communication between stage and web interface.
