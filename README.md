@@ -1,6 +1,7 @@
 # remote stage control demo
 
-Provide demo for real-time control with xy-stage via simple web interface. 
+Demo for real-time control with xy-stage devices via web browser. 
+You should have use a MQTT broker. Both stage devices and web interface will communicate through this centralized server.
 
 # setup
     > git clone https://gitlab.misasa.okayama-u.ac.jp/DREAM/vs-remote.git
