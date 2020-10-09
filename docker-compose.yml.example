@@ -13,3 +13,11 @@ services:
     ports:
       - "1883:1883"
       - "12000:12000"
+  stage:
+    build:
+      context: ./stage
+    volumes:
+      - ./stage/demo.py:/usr/src/app/demo.py
+    depends_on:
+      - mosquitto
+  
