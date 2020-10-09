@@ -26,8 +26,8 @@ A stage device named **myStage** publishes status information on topic **stage/i
     Attaching to vs-remote_stage_1
     stage_1      | 2020-10-09 04:00:49,092 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}} on topic stage/info/myStage
     stage_1      | 2020-10-09 04:00:49,093 INFO:published: 1000
-    stage_1      | 2020-10-09 04:00:50,096 INFO:Received message 'b'{"command":"GOTO","d_x":"35.893246","d_y":"139.954909"}'' on topic 'stage/ctrl/myStage' with QoS 0
-    stage_1      | 2020-10-09 04:00:51,100 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}} on topic stage/info/myStage
+    stage_1      | 2020-10-09 04:00:50,096 INFO:Received message 'b'{"command":"GOTO","d_x":"35.893","d_y":"139.954"}'' on topic 'stage/ctrl/myStage' with QoS 0
+    stage_1      | 2020-10-09 04:00:51,100 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 35.893, "y_world": 139.954}} on topic stage/info/myStage
     stage_1      | 2020-10-09 04:00:51,100 INFO:published: 1001
 
     > mosquitto_sub -h localhost -t stage/info/myStage
