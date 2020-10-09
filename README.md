@@ -5,9 +5,15 @@ This demo uses a web server, a stage, and a MQTT broker.
 A MQTT broker is required to bidirectional communication between stage and web interface.
 In MQTT, the word topic refers to a string that the broker uses to filter messages for each connected client. 
 A stage named **myStage** publishes current position (and status) on the topic **stage/info/myStage** 
-with a JSON encoded message payload like **{"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}}**.
+with a JSON encoded message payload like the following.
+
+`{"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}}`
+
 A web interface for **myStage** receives the position on the topic and updates interface in real-time.
-The web interface publishes stage control commands on the topic **stage/ctrl/myStage** with message payload of **{"command":"GOTO","d_x":"35.893","d_y":"139.954"}**.
+The web interface publishes stage control commands on the topic **stage/ctrl/myStage** with message payload like the following.
+
+`{"command":"GOTO","d_x":"35.893","d_y":"139.954"}`
+
 The stage receives commands on the topic and move to the position in real-time.
 
 To install and setup, issue following commands.
