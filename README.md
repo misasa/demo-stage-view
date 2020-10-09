@@ -18,7 +18,10 @@ The stage client receives commands on the topic and control the stage device.
     > cd vs-remote
     > cp docker-compose.yml.example docker-compose.yml
     > docker-compose up -d
-
+    Creating network "vs-remote_default" with the default driver
+    Creating vs-remote_httpd_1     ... done
+    Creating vs-remote_mosquitto_1 ... done
+    Creating vs-remote_stage_1     ... done
 
 # access to the web interface
 
