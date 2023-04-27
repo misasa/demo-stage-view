@@ -1,4 +1,4 @@
-# real-time stage control over MQTT
+# MQTT project -- demo-stage-view 
 
 Demo for real-time control of xy-stage devices with a web interface. 
 A MQTT broker is required to bidirectional communication between stage and web interface.
