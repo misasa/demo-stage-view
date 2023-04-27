@@ -17,8 +17,8 @@ The stage receives commands on the topic and move to the position in real-time.
 
 To install and setup, issue following commands.
 
-    $ git clone https://gitlab.misasa.okayama-u.ac.jp/DREAM/vs-remote.git
-    $ cd vs-remote
+    $ git clone https://github.com/misasa/demo-stage-view.git
+    $ cd demo-stage-view
     $ cp docker-compose.yml.example docker-compose.yml
     $ docker-compose up -d
     Creating network "vs-remote_default" with the default driver
