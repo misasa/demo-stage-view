@@ -32,9 +32,9 @@ SYNOPSIS AND USAGE
   %prog [options]
 
 DESCRIPTION
-    MQTT publisher and subscriber for vs-remote app. This program
+    MQTT publisher and subscriber for stage-view app. This program
     publishes stage or marker position regulary and receives commands
-    from vs-remote app.
+    from stage-view app.
     Note that this program reads `~/.vs2007rc' for configuration.
     Set `stage-name' line on the configuration file as below.
 
