@@ -21,10 +21,10 @@ To install and setup, issue following commands.
     $ cd demo-stage-view
     $ cp docker-compose.yml.example docker-compose.yml
     $ docker-compose up -d
-    Creating network "vs-remote_default" with the default driver
-    Creating vs-remote_httpd_1     ... done
-    Creating vs-remote_mosquitto_1 ... done
-    Creating vs-remote_stage_1     ... done
+    Creating network "demo-stage-view_default" with the default driver
+    Creating demo-stage-view_mosquitto_1 ... done
+    Creating demo-stage-view_httpd_1     ... done
+    Creating demo-stage-view_stage_1     ... done
 
 This setup a web interface and a MQTT broker, and creates a stage named **myStage**.
 To access the web interface for **myStage**, open a web browser with following URL. 
@@ -34,7 +34,7 @@ To access the web interface for **myStage**, open a web browser with following U
 To see communications between stage and web interface, issue following command. 
 
     $ docker-compose logs -f stage
-    Attaching to vs-remote_stage_1
+    Attaching to demo-stage-view_stage_1
     stage_1      | 2020-10-09 04:00:49,092 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}} on topic stage/info/myStage
     stage_1      | 2020-10-09 04:00:49,093 INFO:published: 1000
     stage_1      | 2020-10-09 04:00:50,096 INFO:Received message 'b'{"command":"GOTO","d_x":"35.893","d_y":"139.954"}'' on topic 'stage/ctrl/myStage' with QoS 0
@@ -44,7 +44,7 @@ To see communications between stage and web interface, issue following command.
 To create another stage, issue following command.
 
     $ docker-compose run stage --stage-name=anotherStage
-    Creating vs-remote_stage_run ... done
+    Creating demo-stage-view_stage_run ... done
     2020-10-09 09:03:45,785 INFO:{'verbose': False, 'stage_name': 'anotherStage', 'mqtt_host': 'mosquitto', 'mqtt_port': 1883, 'log_level': 'INFO', 'topic_info': 'stage/info/anotherStage', 'topic_ctrl': 'stage/ctrl/anotherStage'}
     2020-10-09 09:03:45,788 INFO:publish message {"status": {"isConnected": "false", "isRunning": "false"}, "position": {"x_world": 0.0, "y_world": 0.0}} on topic stage/info/anotherStage
     2020-10-09 09:03:45,788 INFO:Connected with result code 0
